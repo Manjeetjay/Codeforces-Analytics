@@ -1,38 +1,18 @@
 :root {
-  /* Black & White / Monochrome Palette */
   --primary-blue: #252525;
   --primary-blue-dark: #333333;
   --primary-blue-light: #666666;
-
   --secondary-purple: #363636;
-  /* Dark gray */
   --secondary-purple-dark: #303030;
-
-  --success-green: #000000;
-  /* Use icons/shapes for status, keep color neutral or specific if needed, but request asked for B&W */
-  /* Keeping semantic colors but desaturated or monochrome where appropriate, 
-     but for "Simple like black and white" usually means high contrast monochrome. 
-     I will use stark black/white and grays. */
   --success-green: #10b981;
-  /* Keep semantic colors for data viz, or user might be confused. 
-                              User said "color theme", usually implies UI elements. 
-                              I will make UI elements monochrome but keep charts accessible or grayscale.
-                              Let's make primary UI monochrome. */
-
-  /* Re-defining provided palette to Monochrome */
   --primary-blue: #171717;
-  /* Nearly black */
   --primary-blue-dark: #000000;
   --primary-blue-light: #404040;
-
   --secondary-purple: #262626;
   --secondary-purple-dark: #0a0a0a;
-
-  /* Status colors - kept for utility but UI will be B&W */
   --success-green: #166534;
   --warning-orange: #d97706;
   --danger-red: #dc2626;
-
   --gray-50: #fafafa;
   --gray-100: #f5f5f5;
   --gray-200: #e5e5e5;
@@ -44,35 +24,104 @@
   --gray-800: #262626;
   --gray-900: #171717;
 
-  /* Light Theme as base or Dark? User said "Simple like black and white". 
-     Often implies white background, black text. Or Dark mode.
-     The current app had --bg-primary: #0f172a (dark blue).
-     I will switch to a clean White/Light theme by default or a stark Dark theme.
-     The user didn't specify Light or Dark, just B&W.
-     Let's go with a modern "Dark" B&W or "Light" B&W. 
-     Given "Simple", a clean WHITE background with BLACK text is timeless.
-     But typical "hacker" tools are dark. 
-     Let's stick to the current dark-ish convention but remove the BLUE tint.
-  */
-
   --bg-primary: #000000;
   --bg-secondary: #0a0a0a;
   --bg-card: #121212;
   --bg-card-hover: #1f1f1f;
-
   --text-primary: #ffffff;
   --text-secondary: #a3a3a3;
   --text-muted: #737373;
-
   --border-color: #333333;
   --shadow-sm: 0 1px 2px 0 rgba(255, 255, 255, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(255, 255, 255, 0.1);
-
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 250ms ease-in-out;
   --transition-slow: 350ms ease-in-out;
+
+  /* New Aesthetic Variables */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --primary-gradient: linear-gradient(135deg, #fff 0%, #a3a3a3 100%);
+  --accent-glow: 0 0 120px rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.15);
+  }
+
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+}
+
+.text-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Grid Background Pattern */
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
 }
 
 * {
@@ -180,12 +229,12 @@ h4 {
 .btn-primary {
   background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-purple) 100%);
   color: white;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
 }
 
 .btn-primary:active {
