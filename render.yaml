@@ -23,8 +23,9 @@ services:
       - key: CORS_ALLOWED_ORIGINS
         sync: false
 
-staticSites:
-  - name: codemetrics-frontend
+  - type: web
+    name: codemetrics-frontend
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     publishDir: frontend/dist
     routes:
