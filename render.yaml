@@ -27,7 +27,7 @@ services:
     name: codemetrics-frontend
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
-    publishDir: frontend/dist
+    staticPublishPath: frontend/dist
     routes:
       - type: rewrite
         source: /**
@@ -37,7 +37,7 @@ services:
         fromService:
           type: web
           name: codemetrics-backend
-          property: url
+          property: host
 
 databases:
   - name: codemetrics-db
