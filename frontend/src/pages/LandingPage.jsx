@@ -99,8 +99,7 @@ const LandingPage = () => {
                 position: 'relative',
                 zIndex: 1,
                 padding: '6rem 2rem',
-                borderTop: '1px solid rgba(255,255,255,0.05)',
-                background: 'linear-gradient(to bottom, transparent, var(--bg-secondary) 20%)'
+                background: 'linear-gradient(to bottom, transparent, var(--bg-secondary) 10%)'
             }}>
                 <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <div className="glass-panel" style={{ padding: '3rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '4rem' }}>
@@ -115,11 +114,11 @@ const LandingPage = () => {
 
                             <div className="grid grid-cols-2 gap-2">
                                 <div className="card" style={{ background: 'rgba(255,255,255,0.03)', border: 'none' }}>
-                                    <BarChart2 className="mb-2" style={{ color: 'var(--text-primary)' }} />
+                                    <BarChart2 className="mb-2" style={{ color: 'rgba(0, 10, 104, 1)' }} />
                                     <div className="text-muted text-sm">Problem Stats</div>
                                 </div>
                                 <div className="card" style={{ background: 'rgba(255,255,255,0.03)', border: 'none' }}>
-                                    <Users className="mb-2" style={{ color: 'var(--text-primary)' }} />
+                                    <Users className="mb-2" style={{ color: 'rgba(0, 85, 14, 1)' }} />
                                     <div className="text-muted text-sm">Peer Ranking</div>
                                 </div>
                             </div>

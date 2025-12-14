@@ -1,0 +1,48 @@
+services:
+  # Backend Service
+  - type: web
+    name: codemetrics-backend
+    runtime: docker
+    rootCommand: cd backend
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JAVA_VERSION
+        value: 17
+      - key: DB_URL
+        fromDatabase:
+          name: codemetrics-db
+          property: connectionString
+      - key: DB_USERNAME
+        fromDatabase:
+          name: codemetrics-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: codemetrics-db
+          property: password
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false # Set this in Render dashboard after frontend deploy
+
+  # Frontend Service
+  - type: static
+    name: codemetrics-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    publishDir: frontend/dist
+    routes:
+      - type: rewrite
+        source: /**
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: codemetrics-backend
+          envVarKey: RENDER_EXTERNAL_URL
+
+databases:
+  - name: codemetrics-db
+    databaseName: codemetrics
+    user: codemetrics_user
+    plan: free # Optional: specify plan if needed
