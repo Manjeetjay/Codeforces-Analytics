@@ -2,7 +2,7 @@ services:
   - type: web
     name: codemetrics-backend
     runtime: docker
-    rootCommand: cd backend
+    dockerContext: backend
     envVars:
       - key: PORT
         value: 8080
@@ -25,7 +25,6 @@ services:
 
 staticSites:
   - name: codemetrics-frontend
-    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     publishDir: frontend/dist
     routes:
@@ -37,10 +36,9 @@ staticSites:
         fromService:
           type: web
           name: codemetrics-backend
-          envVarKey: RENDER_EXTERNAL_URL
+          property: url
 
 databases:
   - name: codemetrics-db
     databaseName: codemetrics
-    user: codemetrics_user
     plan: free
